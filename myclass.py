@@ -49,4 +49,4 @@ class Student:
 syuhada  = Student()
 syuhada.attendClass()
 syuhada.doProject("Pokemon")
-syuhada.attendExam("Python 1")
+print(syuhada.attendExam("Machine Learning"))
