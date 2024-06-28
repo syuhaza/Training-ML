@@ -41,7 +41,12 @@ class Student:
     def doProject(self, projectname):
         print("Object started doing the project:", projectname)
 
+    def attendExam(self, exam):
+        grade = "A"
+        return f"Object has attended the exam: {exam} and obtained the score {grade}"
+
 # Let us create our first object
-zul  = Student()
-zul.attendClass()
-zul.doProject("Pokemon")
+syuhada  = Student()
+syuhada.attendClass()
+syuhada.doProject("Pokemon")
+syuhada.attendExam("Python 1")
