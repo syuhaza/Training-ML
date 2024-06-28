@@ -155,33 +155,70 @@
 #       break
 
 
-def sum(a,b):
-    return a + b
-# print(sum(10,20))
+# def sum(a,b):
+#     return a + b
+# # print(sum(10,20))
 
-# reminder when we see "function(value)" we always call values as argument
-# in the above statement it looks we are passing
+# # reminder when we see "function(value)" we always call values as argument
+# # in the above statement it looks we are passing
 
-def minus(a,b):
-    return a - b
+# def minus(a,b):
+#     return a - b
 
-"""def arithematic(keyword, a, b):
-    if keyword == "s":
-        return sum(a,b)
-    elif keyword == "m":
-        return minus(a,b)
-"""
-# arithematic("s", 10, 20)
-# notice no there is no () after the function name
-# this is how you pass function as an argument to another 
-def arithematic(func, a, b):
-    return func(a,b)
+# """def arithematic(keyword, a, b):
+#     if keyword == "s":
+#         return sum(a,b)
+#     elif keyword == "m":
+#         return minus(a,b)
+# """
+# # arithematic("s", 10, 20)
+# # notice no there is no () after the function name
+# # this is how you pass function as an argument to another 
+# def arithematic(func, a, b):
+#     return func(a,b)
     
-# arithematic(minus, 10, 20)
-print(arithematic(sum, 10, 20))
-print(arithematic(minus, 10, 20))
+# # arithematic(minus, 10, 20)
+# print(arithematic(sum, 10, 20))
+# print(arithematic(minus, 10, 20))
 
 
-def mul(a,b):
-    return a * b
-print(arithematic(mul, 10, 20))
+# def mul(a,b):
+#     return a * b
+# print(arithematic(mul, 10, 20))
+
+
+
+
+def numberToWord(num):
+
+    if num == 0:
+      return "The number is zero"
+
+    words = ""
+    firstDigit = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]
+    teenDigit = ["Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eightteen","Nineteen"]
+    tensDigit = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
+
+    if num >= 1000:
+      words += firstDigit[num // 1000-1] + " thousands "
+      num = num % 1000
+    if num >= 100:
+      words += firstDigit[num // 100-1] + " hundred " 
+      num %= 100
+    if num >= 11 and num <= 19:
+      words += " and " + teenDigit[num-11] + " "
+      num = 0
+    elif num >= 20:
+      words += " and " + tensDigit[num//10] + " "
+      num %= 10 
+    if num >= 1 and num <= 10:
+        words += firstDigit[num-1] + " "
+    return words
+
+
+num = int(input("Enter a number to convert into words: "))
+
+words = numberToWord(num)
+
+print("The words representation of the number: ", words)
+
