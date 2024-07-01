@@ -182,3 +182,36 @@ if convertRomanOrNumeral.isdigit():
 else:
     result = printRoman(convertRomanOrNumeral.upper())
     print("The number of the Roman numeral: ", result)
+
+
+# get set from user
+set1 = list(map(int, input().split(",")))   
+set2 = list(map(int, input().split(",")))   
+
+set1 = set(set1)
+set2 = set(set2)
+
+print(set1.issubset(set2))
+print(set2.issubset(set1))
+print(set1.issuperset(set2))
+print(set2.issuperset(set1))
+
+# User input using dictionary
+numClients = int(input("Enter the number of clients\n"))
+
+detailsClient = {}
+for i in range(1, numClients + 1):
+    name = input(f"Enter the details of the client {i}\n")
+    email = input("")
+    passportNum = input("")
+    detailsClient[passportNum] = f"\n{name}--{email}--{passportNum}"
+
+searchPassNum = input("Enter the passport number of the client to be searched\n")
+
+if searchPassNum in detailsClient:
+    print(f"Client Details\n")
+    print(detailsClient[searchPassNum])
+else:
+    print("Client not found")
+
+
