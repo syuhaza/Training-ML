@@ -249,7 +249,7 @@ def calculateDatetime():
     # quotient, remainder = divmod()
     # delta.second - return the number of seconds
 
-    numSheet = int(input("Enter total Number of sheets:"))
+numSheet = int(input("Enter total Number of sheets:"))
 
 attendanceSheet = []
 for i in range(numSheet):
