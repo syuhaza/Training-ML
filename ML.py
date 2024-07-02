@@ -249,6 +249,10 @@ def calculateDatetime():
     # quotient, remainder = divmod()
     # delta.second - return the number of seconds
 
+#######################################################################
+#######################################################################
+#######################################################################
+# Simplify code
 numSheet = int(input("Enter total Number of sheets:"))
 
 attendanceSheet = []
@@ -268,5 +272,24 @@ print("Attendance Sheets with Register Number:", attendanceSheet)
 # tuple - converted the result of set.union back into tuple
 print("Final sheet: ", tuple(set.union(*map(set, attendanceSheet))))
 
+############################################################################
+# expand code
+numSheet = int(input("Enter total Number of sheets:"))
+
+attendanceSheet = []
+for i in range(numSheet):
+    registerNum = tuple(map(int, input().split(" ")))
+    attendanceSheet.append(registerNum)
+
+# convert each of the tuple into set
+sets = map(set, attendanceSheet)
+# Find union from all the set
+# * operator open the list bracket and we have all each set without a list
+union_set = set.union(*sets)
+
+tupleSheet  = tuple(union_set)
+
+print("Attendance Sheets with Register Number:", tuple(attendanceSheet))
+print("Final sheet:", tupleSheet)
 
 
