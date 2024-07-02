@@ -36,3 +36,29 @@ givenNumber //= 10 #9
 result = result * 10 + (givenNumber % 10)
 givenNumber //= 10 #0
 result = result * 10 + (givenNumber % 10)
+
+
+str_numbers = input()
+str_numbers = str_numbers.split(",")
+print(str_numbers)
+
+numbers = [int(str_number) for str_number in str_numbers]
+print(numbers)
+numbers = map(int, str_numbers)
+# print(list(numbers))
+print(set(list(numbers)))
+
+fruits = [{"Apple",10,}]
+# tuple can be inside the set
+# bcause both are hashable
+# cant be modify
+# but list cant be inside set
+
+nestedlist = [
+    [1,2,3],
+    [3,4,5],
+    [1,2,3]
+]
+nestedlist = [tuple(item) for item in nestedlist]
+print(set(nestedlist))
+
