@@ -1,0 +1,6 @@
+Product | Quantity | Price
+Television | 4 | 3500.5
+Radio | 45 | 280.68
+Radio | 3 | 456.6
+Kettle | 1 | 150.5
+Cookies | 7 | 60.45
