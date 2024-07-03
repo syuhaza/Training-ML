@@ -25,12 +25,19 @@ from os.path import exists
 #     pass
 # else:
 #     open(filename, 'xt')
-def keyboardInput(datatype, caption, errorMessage):
+def keyboardInput(datatype, caption, errorMessage, defaultValue = None):
     value = None
     isInvalid = True
     while(isInvalid):
         try:
-            value = datatype(input(caption))
+            if defaultValue == None:
+                value = datatype(input(caption))
+            else:
+                value = input(caption)
+                if value.strip() == "":
+                    value = defaultValue
+                else:
+                    value = datatype(value)
         except:
             print(errorMessage)
         else:
@@ -40,14 +47,15 @@ def keyboardInput(datatype, caption, errorMessage):
 def doMenu():
     choice = -1
     while choice != 0:
-        print("-----------------")
-        print("|    0 - Exit   |")
-        print("|    1 - List   |")
-        print("|    2 - Add    |")
-        print("|    3 - Edit   |")
-        print("-----------------")
+        print("-------------------")
+        print("|    0 - Exit     |")
+        print("|    1 - List     |")
+        print("|    2 - Add      |")
+        print("|    3 - Edit     |")
+        print("|    4 - Delete   |")
+        print("-------------------")
 
-        choice = keyboardInput(int, "Choice[0, 1, 2, 3]: ", "Choice must be an Integer.")
+        choice = keyboardInput(int, "Choice[0, 1, 2, 3, 4]: ", "Choice must be an Integer.")
         if choice == 0:
             print("Thank you for using our system.")
         elif choice == 1:
@@ -56,6 +64,8 @@ def doMenu():
             addProduct(filename)
         elif choice == 3:
             editProduct(filename)
+        elif choice == 4:
+            deleteProduct(filename)
 
 def createFile(filename):
     if not exists(filename):
@@ -83,9 +93,9 @@ def createTitle(filename):
 
 def addProduct(filename):   
     try:
-        product = keyboardInput(str, "Product:","Product must be in string")
-        quantity = keyboardInput(int, "Quantity:","Quantity must be in integer")
-        price = keyboardInput(float, "Price:","Price must be in float")
+        product = keyboardInput(str, "Product: ","Product must be in string")
+        quantity = keyboardInput(int, "Quantity: ","Quantity must be in integer")
+        price = keyboardInput(float, "Price: ","Price must be in float")
         with open(filename, 'at') as filehandler:
             filehandler.write(f"\n{product} | {quantity} | {price}")
     except Exception as e:
@@ -97,12 +107,12 @@ def printProduct(filename):
         with open(filename, "rt") as filehandler:
             lines = filehandler.readlines()
         for index, line in enumerate(lines):
-            product, quantity , price =line.strip().split(" | ") # strip method remove space
+            product, quantity , price =line.strip().split("|") # strip method remove space
             if(index == 0):
-                print(f"{"No":5}{product:40}{quantity:>20}{price:>20}")
-                print("="*85)
+                print(f"{"No.":5}{product:20}{quantity:>15}{price:>15}")
+                print("="*60)
             else:
-                print(f"{index:<5}{product:30}{int(quantity):>10}{float(price):>10.2f}")
+                print(f"{index:<5}{product:20}{int(quantity):>15}{float(price):>15.2f}")
 
     except Exception as e:
         print("Something went wrong when we append the product:", e)
@@ -123,20 +133,46 @@ def editProduct(filename):
             print(f"Product: {product}\nQuantity: {quantity}\nPrice: {price}")
             confirm = keyboardInput(str, "Are you sure you want to edit this product (y / n) ?: ", "Respond not valid")
             if confirm == 'y':
-                newproduct = keyboardInput(str, f"Product[{product}]: ","Product must be in String")
-                newquantity = keyboardInput(int, f"Quantity[{quantity}]: ","Quantity must be in Integer")
-                newprice = keyboardInput(float, f"Price[{price}]: ","Price must be in Float")
+                newproduct = keyboardInput(str, f"Product[{product}]: ","Product must be in String", product)
+                newquantity = keyboardInput(int, f"Quantity[{quantity}]: ","Quantity must be in Integer", quantity)
+                newprice = keyboardInput(float, f"Price[{price}]: ","Price must be in Float", price)
                 data[index] = [newproduct, newquantity, newprice]
                 newlines = []
                 for product in data:
-                    line = "|".join(map(str, product))
+                    line = " | ".join(map(str, product)) + "\n"
                     newlines.append(line)
-                print(newlines)
+                newlines[-1] = newlines[-1].strip()
                 with open(filename, "wt") as filehandler:
                     filehandler.writelines(newlines)
     except Exception as e:
         print("Something went wrong when we edit the product:", e)
 
+def deleteProduct(filename):
+    try:
+        lines = None
+        with open(filename, "rt") as filehandler:
+            lines = filehandler.readlines()
+        data = []
+        for line in lines:
+            data.append(line.strip().split("|"))
+        index = keyboardInput(int, "Please keyin the index of the Product: ", "Index must be Integer")
+        if index >= len(data):
+            print("Sorry product not available")
+        else:
+            product, quantity , price = data[index]
+            print(f"Product: {product}\nQuantity: {quantity}\nPrice: {price}")
+            confirm = keyboardInput(str, "Are you sure you want to delete this product (y / n) ?: ", "Respond not valid")
+            if confirm == 'y':
+                del data[index] 
+                newlines = []
+                for product in data:
+                    line = "|".join(map(str, product)) + "\n"
+                    newlines.append(line)
+                newlines[-1] = newlines[-1].strip()
+                with open(filename, "wt") as filehandler:
+                    filehandler.writelines(newlines)
+    except Exception as e:
+        print("Something went wrong when we delete the product:", e)
 
 
 filename = "fruits.txt"
