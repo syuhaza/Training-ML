@@ -82,7 +82,7 @@ def createFile(filename):
 
 # content = input("Fruit Name:")
 
-# whenever you can out of with blick the resource will be closed automatically
+# whenever you can out of with block the resource will be closed automatically
 def createTitle(filename):
     try:
         with open(filename, 'wt') as filehandler:
@@ -180,7 +180,6 @@ createFile(filename)
 doMenu()
 # addProduct(filename)
 # printProduct(filename)
-
 
 
 

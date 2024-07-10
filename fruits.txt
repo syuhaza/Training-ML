@@ -1,6 +1,6 @@
-Product    |    Quantity    |    Price
-Television    |    4    |    3500.5
-Radio    |    3    |    456.6
-Kettle    |    1    |    150.5
-Cookies    |    7    |    60.45
-Bread   | 5 |   4.5
+Product     |     Quantity     |     Price
+Television     |     4     |     3500.5
+Radio     |     3     |     456.6
+Cookies     | 6 |     60.45
+Bread    |  5  |    4.5
+Bread | 4 | 20.5
