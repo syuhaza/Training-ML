@@ -1,18 +1,25 @@
-#Arithmatic Operators
+# print is python built in function
+print("Hello World")
+print("Welcome to Python")
+print("Syuhada", "is", "learning", "Python")
+
+
+""" EXPRESSION """
+
+## Arithmatic Operators
 x = 4
 y = 2
 print("Addition: ", x+y)
 print("Subtraction: ", x-y)
 print("Multiply: ", x*y)
 print("Divide: ", x/y)
-
 print("Quotient: ", x // y)
 print("Remainder: ", x % y)
 
 print("Exponent: ", 10 ** 3)
 print("What is the maximum number in a 64 bit env: ", (2 ** 64) - 1)
 
-#Assignment operators
+## Assignment operators
 x = 100 
 x += 1 #x = x + 1
 # y = m*x + c
